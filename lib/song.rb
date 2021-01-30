@@ -114,10 +114,14 @@ class Song
 
         song_artist = Artist.find_or_create_by_name(artist)
         song_genre = Genre.find_or_create_by_name(genre)
-        song = self.find_or_create_by_name(song)
+        new_song = Song.new(song, song_artist, song_genre)
         # binding.pry
     end
 
-    
+    def self.create_from_filename(file)
+        self.new_from_filename(file).tap {|song| song.save}
+    end
+
+
 end
 
